@@ -1,22 +1,30 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/eccomerce?allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Warsaw
-    username: root
-    password: Atu171195
-
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
-    hibernate:
-      ddl-auto: update
 
   data:
     rest:
       base-path: /api
 
+  datasource:
+    url: jdbc:mysql://localhost:3306/eccomerce?allowPublicKeyRetrieval=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Warsaw
+    username: root
+    password: 123456
+    initialization-mode: always
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
   security:
     user:
       name: admin
-      password: 53cr3t
+      password: 123456
+
+#server:
+#  ssl:
+#    key-store: classpath:mykeys.jks
+#    key-store-password: 123456
+#    key-password: 123456

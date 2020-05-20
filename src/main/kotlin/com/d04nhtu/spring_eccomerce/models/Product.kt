@@ -5,14 +5,14 @@ import org.springframework.data.rest.core.annotation.RestResource
 import javax.persistence.*
 
 @Entity(name = "products")
-data class Product(
+class Product(
         @Id @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Long? = null,
+        var id: Long? = null,
 
-        val name: String = "",
-        val brand: String = "",
-        val description: String = "",
-        val saleOff: Boolean = false,
-        val price: Double,
-        val pictureUrl: String)
+        var name: String = "",
+        var brand: String = "",
+        var description: String = "",
+        var saleOff: Boolean = false,
+        var price: Double = 0.0,
+        var pictureUrl: String = "")
 

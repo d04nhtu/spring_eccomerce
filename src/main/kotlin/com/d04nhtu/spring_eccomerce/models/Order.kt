@@ -12,32 +12,32 @@ import kotlin.collections.ArrayList
 //const val serialVersionUID: Long = 1L
 
 @Entity(name = "orders")
-data class Order(
+ class Order(
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Long? = null,
+        var id: Long? = null,
 
         var placedAt: Date? = null,
 
         @ManyToOne
-        val user: User,
+        var user: User,
 
         @NotBlank(message = "Zip code is required")
-        val deliveryAddress: String,
+        var deliveryAddress: String,
 
         @CreditCardNumber(message = "Not a valid credit card number")
-        val ccNumber: String,
+        var ccNumber: String,
 
         @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
                 message = "Must be formatted MM/YY")
-        val ccExpiration: String,
+        var ccExpiration: String,
 
         @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
-        val ccCVV: String,
+        var ccCVV: String,
 
         @ManyToMany(targetEntity = Product::class)
-        val products: List<Product> = ArrayList())
+        var products: List<Product> = ArrayList())
 //    : Serializable
 {
 
