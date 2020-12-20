@@ -11,10 +11,12 @@ import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 
 @Entity(name = "users")
-class User(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long? = null,
+class DAOUser(
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private var id: Long = 0,
         @get: NotBlank var username: String = "",
         var password: String = "",
+        var role: String = "",
         var email: String = "",
         var address: String = "",
         var phoneNumber: String = ""
