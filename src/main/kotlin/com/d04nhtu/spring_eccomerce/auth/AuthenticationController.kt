@@ -1,8 +1,5 @@
-package com.d04nhtu.spring_eccomerce.controller
+package com.d04nhtu.spring_eccomerce.auth
 
-import com.d04nhtu.spring_eccomerce.models.AuthenticationRequest
-import com.d04nhtu.spring_eccomerce.models.AuthenticationResponse
-import com.d04nhtu.spring_eccomerce.models.UserDTO
 import com.d04nhtu.spring_eccomerce.security.CustomUserDetailsService
 import com.d04nhtu.spring_eccomerce.security.JwtUtil
 import io.jsonwebtoken.impl.DefaultClaims
@@ -53,8 +50,12 @@ class AuthenticationController {
 
     @RequestMapping(value = ["/register"], method = [RequestMethod.POST])
     @Throws(Exception::class)
-    fun saveUser(@RequestBody user: UserDTO): ResponseEntity<*>? {
-        return ResponseEntity.ok(userDetailsService.save(user))
+    fun saveUser(@RequestBody req: CreateUserRequest): ResponseEntity<*>? {
+        return if (userDetailsService.existsByUsername(req.username)) {
+            ResponseEntity.badRequest().body("Username exists!")
+        } else {
+            ResponseEntity.ok(userDetailsService.save(req))
+        }
     }
 
     @RequestMapping(value = ["/refreshtoken"], method = [RequestMethod.GET])

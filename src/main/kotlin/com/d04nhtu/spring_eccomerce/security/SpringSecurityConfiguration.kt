@@ -47,8 +47,9 @@ class SpringSecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
             .authorizeRequests().antMatchers("/helloadmin").hasRole("ADMIN")
+            .antMatchers("/api/**").permitAll()
             .antMatchers("/hellouser").hasAnyRole("USER", "ADMIN")
-            .antMatchers("/api/**", "/user").hasRole("USER")
+            .antMatchers("/user").hasRole("USER")
             .antMatchers("/authenticate", "/register").permitAll().anyRequest().authenticated()
             .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

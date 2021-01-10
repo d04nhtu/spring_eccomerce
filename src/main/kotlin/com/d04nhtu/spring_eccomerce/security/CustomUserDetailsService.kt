@@ -1,7 +1,7 @@
 package com.d04nhtu.spring_eccomerce.security
 
-import com.d04nhtu.spring_eccomerce.models.DAOUser
-import com.d04nhtu.spring_eccomerce.models.UserDTO
+import com.d04nhtu.spring_eccomerce.auth.CreateUserRequest
+import com.d04nhtu.spring_eccomerce.model.DaoUser
 import com.d04nhtu.spring_eccomerce.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -24,7 +24,7 @@ class CustomUserDetailsService : UserDetailsService {
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
         val roles: List<SimpleGrantedAuthority>
-        val user: DAOUser? = userDao.findByUsername(username)
+        val user: DaoUser? = userDao.findByUsername(username)
         if (user != null) {
             roles = listOf(SimpleGrantedAuthority(user.role))
             return User(user.username, user.password, roles)
@@ -32,11 +32,15 @@ class CustomUserDetailsService : UserDetailsService {
         throw UsernameNotFoundException("User not found with the name $username")
     }
 
-    fun save(user: UserDTO): DAOUser {
-        val newUser = DAOUser()
-        newUser.username = user.username
-        newUser.password = bcryptEncoder.encode(user.password)
-        newUser.role = user.role
+    fun existsByUsername(username: String): Boolean {
+        return userDao.existsByUsername(username)
+    }
+
+    fun save(req: CreateUserRequest): DaoUser {
+        val newUser = DaoUser()
+        newUser.username = req.username
+        newUser.password = bcryptEncoder.encode(req.password)
+        newUser.role = req.role
         return userDao.save(newUser)
     }
 }
