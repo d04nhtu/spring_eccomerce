@@ -9,8 +9,9 @@ spring:
       base-path: /api
 
   datasource:
-    url: jdbc:postgresql://localhost:49158/ecommerce
-    username: postgres
+    url: jdbc:postgresql://ec2-99-81-177-233.eu-west-1.compute.amazonaws.com:5432/d9s8g9isth1r6o
+    username: uvbzxgqsgionoe
+    password: 7daa080b2895d15a8d81cc0005c0c0c14a484c9b2ac74771bcd46a1ffeaeca77
     initialization-mode: always
 
   jpa:
