@@ -43,5 +43,4 @@ fun main(args: Array<String>) {
     runApplication<SpringEccomerceApplication>(*args) {
         setBannerMode(Banner.Mode.OFF)
     }
-
 }

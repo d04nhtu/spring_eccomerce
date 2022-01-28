@@ -62,6 +62,12 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "com.d04nhtu.spring_eccomerce.SpringEccomerceApplication"
+    }
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
