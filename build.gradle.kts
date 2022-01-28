@@ -32,6 +32,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-parent:2.6.3")
+    implementation("org.springframework.boot:spring-boot-maven-plugin:2.6.3")
     implementation("org.springframework.data:spring-data-rest-hal-explorer")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.postgresql:postgresql")
@@ -53,15 +55,21 @@ tasks{
     compileJava.inputs.files(processResources)
 }
 
+springBoot {
+    mainClass.set("com.d04nhtu.spring_eccomerce.SpringEccomerceApplication")
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "com.d04nhtu.spring_eccomerce.SpringEccomerceApplication"
+    }
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "1.8"
     }
-}
-
-springBoot {
-    mainClass.set("com.d04nhtu.spring_eccomerce.SpringEccomerceApplication")
 }
 
 tasks.withType<Test> {
